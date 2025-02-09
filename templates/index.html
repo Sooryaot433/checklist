@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Reminder</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (Notification.permission !== "granted") {
+                Notification.requestPermission();
+            }
+        });
+
+        function showNotification(task) {
+            if (Notification.permission === "granted") {
+                let notification = new Notification("Task Reminder!", { 
+                    body: task, 
+                    icon: "https://cdn-icons-png.flaticon.com/512/845/845646.png" 
+                });
+                setTimeout(() => notification.close(), 10000);
+            }
+        }
+
+        setInterval(() => {
+            fetch('/get_notifications')
+                .then(response => response.json())
+                .then(data => {
+                    data.tasks.forEach(task => showNotification(task.task));
+                });
+        }, 10000);
+
+        // Function to open the emergency modal
+        function openEmergencyModal() {
+            document.getElementById('emergencyModal').style.display = 'block';
+        }
+
+        // Function to close the emergency modal
+        function closeEmergencyModal() {
+            document.getElementById('emergencyModal').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Reminder</h1>
+        </header>
+
+        <main>
+            <h2>Add a Task</h2>
+            <form action="/add_task" method="post">
+                <input type="text" name="task" placeholder="Task" required>
+                <input type="time" name="time" required>
+                <button type="submit">Add Task</button>
+            </form>
+
+            <h2>Your Tasks</h2>
+            <ul>
+                {% for task in tasks %}
+                    <li>
+                        <span>{{ task.task }}</span>
+                        <time>{{ task.time }}</time>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <button class="emergency-btn" onclick="openEmergencyModal()">Emergency</button>
+        </main>
+
+        <footer>
+            <p>Welcome, <strong>{{ session['user_id'] }}</strong>! <a href="/logout">Logout</a></p>
+        </footer>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEmergencyModal()">&times;</span>
+            <p>This is an emergency alert message!</p>
+        </div>
+    </div>
+</body>
+</html>
+

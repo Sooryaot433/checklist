@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}To-Do List{% endblock %}</title>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
