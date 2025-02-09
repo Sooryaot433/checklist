@@ -1,0 +1,78 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container */
+.register-container {
+    background-color: #fff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Heading */
+.register-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Inputs */
+.register-container input[type="text"],
+.register-container input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Form Inputs Focus */
+.register-container input[type="text"]:focus,
+.register-container input[type="password"]:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Submit Button */
+.register-container button {
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Submit Button Hover */
+.register-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Link */
+.register-container p {
+    margin-top: 15px;
+    color: #666;
+}
+
+.register-container a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.register-container a:hover {
+    text-decoration: underline;
+}
